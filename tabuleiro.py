@@ -11,7 +11,7 @@ LARGURA = TAMANHO * BLOCO
 ALTURA = TAMANHO * BLOCO + 60
 # cria a janela com o calculo de cima
 tela = pygame.display.set_mode((LARGURA, ALTURA))
-pygame.display.set_caption("Cyber-Geraldo - Bug do Milênio")
+pygame.display.set_caption("Cyber-Geraldo")
 # fonte que vamos usar dps pros textos
 fonte = pygame.font.SysFont("arial", 20)
 # relogio pra travar o FPS senao o jogo crasha
