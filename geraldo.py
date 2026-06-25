@@ -7,7 +7,7 @@ BLOCO = 100
 LARGURA = TAMANHO * BLOCO
 ALTURA = TAMANHO * BLOCO + 60
 tela = pygame.display.set_mode((LARGURA, ALTURA))
-pygame.display.set_caption("Cyber-Geraldo - Bug do Milênio")
+pygame.display.set_caption("CyberGeraldo2077")
 fonte = pygame.font.SysFont("arial", 20)
 clock = pygame.time.Clock()
 # cria a classe pro robo pra usar orientacao a objetos
