@@ -22,6 +22,23 @@ fonte = pygame.font.SysFont("arial", 20)
 # isso aqui é pra controlar a velocidade do jogo (FPS)
 clock = pygame.time.Clock()
 
+# --- CARREGANDO A IMAGEM ---
+NOME_SPRITE_GERALDO = "sprite trabalho cybergeraldo.png"
+
+try:
+    # carrega o geraldo ja com o fundo transparente da imagem png
+    sprite_geraldo_original = pygame.image.load(NOME_SPRITE_GERALDO).convert_alpha()
+    # remove o fundo branco da imagem
+    sprite_geraldo_original.set_colorkey((255, 255, 255))
+    # arruma o tamanho pra caber no quadrado com uma bordinha (80x80)
+    sprite_geraldo = pygame.transform.scale(sprite_geraldo_original, (80, 80))
+except Exception as e:
+    # se der ruim, faz um quadrado azul mesmo
+    print(f"Erro ao carregar o sprite do Geraldo: {e}")
+    sprite_geraldo = pygame.Surface((80, 80))
+    sprite_geraldo.fill((0, 255, 255))
+# ---------------------------
+
 # classe do nosso herói, a gente usou POO pra ficar mais organizado
 class Geraldo:
     def __init__(self):
@@ -160,12 +177,10 @@ def desenhar_tela(geraldo, mapa, msg, ativo, resultado):
     texto_servidor = fonte.render("S", True, (0, 0, 0)) # texto preto pra dar destaque
     tela.blit(texto_servidor, (sx + 42, sy + 37))
     
-    # desenha o Geraldo (P)
+    # desenha o Geraldo usando o sprite da imagem
     gx = geraldo.col * BLOCO
     gy = geraldo.lin * BLOCO
-    pygame.draw.rect(tela, (0, 255, 255), (gx + 10, gy + 10, 80, 80)) # geraldo azul ciano
-    texto_robo = fonte.render("P", True, (0, 0, 0)) # texto preto pra ler facil
-    tela.blit(texto_robo, (gx + 40, gy + 37))
+    tela.blit(sprite_geraldo, (gx + 10, gy + 10))
     
     # fazendo as linhas do tabuleiro virarem roxo neon pra ficar mais cyberpunk
     for i in range(TAMANHO + 1):
