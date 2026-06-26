@@ -22,7 +22,7 @@ fonte = pygame.font.SysFont("arial", 20)
 # isso aqui é pra controlar a velocidade do jogo (FPS)
 clock = pygame.time.Clock()
 
-# --- CARREGANDO AS IMAGENS ---
+#CARREGANDO AS IMAGENS (Se quiser alterar a imagem é aqui!)
 NOME_SPRITE_GERALDO = "sprite trabalho cybergeraldo.png"
 NOME_SPRITE_SERVIDOR = "Servidor Arasaka.jpeg"
 
@@ -50,7 +50,7 @@ except Exception as e:
     sprite_servidor.fill((255, 255, 0))
 # ---------------------------
 
-# classe do nosso herói, a gente usou POO pra ficar mais organizado
+# classe do geraldo
 class Geraldo:
     def __init__(self):
         # ele sempre começa lá em cima na esquerda
