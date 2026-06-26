@@ -1,21 +1,21 @@
-import pygame # importando a biblioteca que a gente vai usar pro jogo
+import pygame
 import random # a gente precisa disso pra sortear onde as coisas vão cair
 
-# iniciando o pygame pra tudo funcionar certinho
+# iniciando o pygame
 pygame.init()
 
-# definindo o tamanho do nosso mapa (5x5 que o professor pediu)
+# definindo o tamanho do mapa (5x5)
 TAMANHO = 5
 # tamanho de cada quadradinho na tela (100 pixels)
 BLOCO = 100
 # calculando a largura e altura total da tela do jogo
 LARGURA = TAMANHO * BLOCO
-# a altura tem 90 pixels a mais pra caber a barrinha de texto embaixo (antes era 60 mas o game over tava cortando)
+# a altura tem 90 pixels
 ALTURA = TAMANHO * BLOCO + 90
 
 # criando a janela do jogo e dando um nome pra ela
 tela = pygame.display.set_mode((LARGURA, ALTURA))
-pygame.display.set_caption("Cyber-Geraldo - Bug do Milênio")
+pygame.display.set_caption("CyberGeraldo2077")
 # escolhendo a fonte pra escrever os textos depois
 fonte = pygame.font.SysFont("arial", 20)
 
@@ -134,47 +134,50 @@ def desenhar_tela(geraldo, mapa, msg, ativo, resultado):
             x = j * BLOCO
             y = i * BLOCO
             
-            # se ele ja passou, mostra um chao verde
+            # Custom area :p
+            
+            # se ele ja passou, mostra um chao roxo neon
             if mapa.foi_visitada(i, j):
-                pygame.draw.rect(tela, (30, 50, 30), (x, y, BLOCO, BLOCO))
+                pygame.draw.rect(tela, (45, 10, 55), (x, y, BLOCO, BLOCO)) # chao visitado (roxo escuro)
             else:
-                # se nao, faz um xadrez cinza e bota uma interrogacao pros itens escondidos
+                # se nao, faz um xadrez cinza quase preto e bota uma interrogacao pros itens escondidos
                 if (i + j) % 2 == 0:
-                    pygame.draw.rect(tela, (35, 35, 50), (x, y, BLOCO, BLOCO))
+                    pygame.draw.rect(tela, (15, 15, 20), (x, y, BLOCO, BLOCO)) # cinza quaaaase preto
                 else:
-                    pygame.draw.rect(tela, (50, 50, 65), (x, y, BLOCO, BLOCO))
+                    pygame.draw.rect(tela, (25, 30, 40), (x, y, BLOCO, BLOCO)) # cinza meio azul escuro
                 
-                texto = fonte.render("?", True, (80, 80, 100))
+                # cor da interrogacao (rosa neon)
+                texto = fonte.render("?", True, (255, 0, 255))
                 tela.blit(texto, (x + 43, y + 37))
                 
-            # desenha a bordinha de cada quadrado
-            pygame.draw.rect(tela, (70, 70, 90), (x, y, BLOCO, BLOCO), 1)
+            # desenha a bordinha de cada quadrado (ciano neon)
+            pygame.draw.rect(tela, (0, 255, 255), (x, y, BLOCO, BLOCO), 1)
             
-    # desenha o servidor (S) roxo ali no final (4,4)
+    # desenha o servidor (S) amarelo neon ali no final (4,4)
     sx = 4 * BLOCO
     sy = 4 * BLOCO
-    pygame.draw.rect(tela, (130, 0, 200), (sx + 10, sy + 10, 80, 80))
-    texto_servidor = fonte.render("S", True, (255, 255, 255))
+    pygame.draw.rect(tela, (255, 255, 0), (sx + 10, sy + 10, 80, 80)) # servidor amarelo neon
+    texto_servidor = fonte.render("S", True, (0, 0, 0)) # texto preto pra dar destaque
     tela.blit(texto_servidor, (sx + 42, sy + 37))
     
-    # desenha o nosso robo Geraldo (P) azulzinho
+    # desenha o Geraldo (P)
     gx = geraldo.col * BLOCO
     gy = geraldo.lin * BLOCO
-    pygame.draw.rect(tela, (0, 130, 255), (gx + 10, gy + 10, 80, 80))
-    texto_robo = fonte.render("P", True, (255, 255, 255))
+    pygame.draw.rect(tela, (0, 255, 255), (gx + 10, gy + 10, 80, 80)) # geraldo azul ciano
+    texto_robo = fonte.render("P", True, (0, 0, 0)) # texto preto pra ler facil
     tela.blit(texto_robo, (gx + 40, gy + 37))
     
-    # fazendo as linhas brancas do tabuleiro pra ficar mais visivel
+    # fazendo as linhas do tabuleiro virarem roxo neon pra ficar mais cyberpunk
     for i in range(TAMANHO + 1):
-        pygame.draw.line(tela, (100, 100, 120), (0, i * BLOCO), (LARGURA, i * BLOCO))
-        pygame.draw.line(tela, (100, 100, 120), (i * BLOCO, 0), (i * BLOCO, TAMANHO * BLOCO))
+        pygame.draw.line(tela, (148, 0, 211), (0, i * BLOCO), (LARGURA, i * BLOCO))
+        pygame.draw.line(tela, (148, 0, 211), (i * BLOCO, 0), (i * BLOCO, TAMANHO * BLOCO))
         
     # fundo escuro pra nossa barra de avisos
-    pygame.draw.rect(tela, (20, 20, 30), (0, TAMANHO * BLOCO, LARGURA, 90))
+    pygame.draw.rect(tela, (5, 5, 15), (0, TAMANHO * BLOCO, LARGURA, 90))
     
     # escreve a vida e as pecas dele
-    texto_energia = fonte.render("Energia: " + str(geraldo.energia), True, (0, 200, 80))
-    texto_comp = fonte.render("Componentes: " + str(geraldo.coletados) + "/3", True, (255, 220, 0))
+    texto_energia = fonte.render("Energia: " + str(geraldo.energia), True, (0, 255, 255)) # ciano neon
+    texto_comp = fonte.render("Componentes: " + str(geraldo.coletados) + "/3", True, (255, 255, 0)) # amarelo neon
     tela.blit(texto_energia, (10, TAMANHO * BLOCO + 5))
     tela.blit(texto_comp, (10, TAMANHO * BLOCO + 30))
     
@@ -182,19 +185,19 @@ def desenhar_tela(geraldo, mapa, msg, ativo, resultado):
     if msg != "":
         # muda a cor da mensagem dependendo do que for
         if resultado == "ganhou":
-            cor = (0, 255, 0) # verde
+            cor = (57, 255, 20) # verde neon
         elif resultado == "perdeu":
-            cor = (255, 50, 50) # vermelho
+            cor = (255, 0, 128) # rosa neon
         else:
-            cor = (255, 140, 0) # laranjinha pros avisos normais
+            cor = (0, 255, 255) # ciano pros avisos normais
             
         texto_msg = fonte.render(msg, True, cor)
         # desci a mensagem pra terceira linha pra ela poder ocupar a tela toda
         tela.blit(texto_msg, (10, TAMANHO * BLOCO + 60))
         
-    # se o jogo acabou, avisa que da pra dar restart
+    # se o jogo acabou, avisa que da pra dar restart (em amarelo neon)
     if not ativo:
-        texto_reinicio = fonte.render("Aperte R pra jogar de novo", True, (255, 255, 255))
+        texto_reinicio = fonte.render("Aperte R pra jogar de novo", True, (255, 255, 0))
         tela.blit(texto_reinicio, (130, 230))
         
     # isso aqui manda o pygame mostrar tudo na tela msm
@@ -219,10 +222,10 @@ teclas = {
     pygame.K_RIGHT: "direita"
 }
 
-# coloquei esse try pra se der BO o codigo nao crashar feiao
+# coloquei esse try pra se der BO o codigo nao crashar
 try:
     rodando = True
-    # loop principal que o professor pediu (while)
+    # loop principal (while)
     while rodando:
         clock.tick(30) # pra nao ficar mega rapido rodando a 1000 fps
         
@@ -272,7 +275,7 @@ try:
                                 resultado = "ganhou"
                                 msg = "Missao completa! Sistema reiniciado!"
                             else:
-                                # senao o cara q continue procurando (ele nao perde aqui)
+                                # senao continue procurando (ele nao perde aqui)
                                 msg = "Você não possui componentes suficientes para realizar o reparo"
                                 
                         # se acabarem as vidas
@@ -285,8 +288,8 @@ try:
         desenhar_tela(geraldo, mapa, msg, ativo, resultado)
         
 except Exception as erro:
-    # se o jogo der ruim mostra onde foi o erro no terminal pra gnt consertar
+    # se o jogo der ruim mostra onde foi o erro no terminal
     print("Ocorreu um erro na execução do jogo:", erro)
 finally:
-    # fecha o pygame suave
+    # fecha o pygame
     pygame.quit()
