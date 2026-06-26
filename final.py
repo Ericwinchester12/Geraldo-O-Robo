@@ -19,10 +19,10 @@ pygame.display.set_caption("CyberGeraldo2077")
 # escolhendo a fonte pra escrever os textos depois
 fonte = pygame.font.SysFont("arial", 20)
 
-# isso aqui é pra controlar a velocidade do jogo (FPS)
+# isso aqui é pra controlar o (FPS)
 clock = pygame.time.Clock()
 
-# --- CARREGANDO A IMAGEM ---
+# CARREGANDO A IMAGEM (se alguem quiser alterar a imagem é aqui)
 NOME_SPRITE_GERALDO = "sprite trabalho cybergeraldo.png"
 
 try:
