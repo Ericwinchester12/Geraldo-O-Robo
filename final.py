@@ -19,11 +19,12 @@ pygame.display.set_caption("CyberGeraldo2077")
 # escolhendo a fonte pra escrever os textos depois
 fonte = pygame.font.SysFont("arial", 20)
 
-# isso aqui é pra controlar o (FPS)
+# isso aqui é pra controlar a velocidade do jogo (FPS)
 clock = pygame.time.Clock()
 
-# CARREGANDO A IMAGEM (se alguem quiser alterar a imagem é aqui)
+# --- CARREGANDO AS IMAGENS ---
 NOME_SPRITE_GERALDO = "sprite trabalho cybergeraldo.png"
+NOME_SPRITE_SERVIDOR = "Servidor Arasaka.jpeg"
 
 try:
     # carrega o geraldo ja com o fundo transparente da imagem png
@@ -37,6 +38,16 @@ except Exception as e:
     print(f"Erro ao carregar o sprite do Geraldo: {e}")
     sprite_geraldo = pygame.Surface((80, 80))
     sprite_geraldo.fill((0, 255, 255))
+
+try:
+    # carrega o servidor arasaka
+    sprite_servidor_original = pygame.image.load(NOME_SPRITE_SERVIDOR).convert_alpha()
+    # arruma o tamanho pra caber no quadrado (80x80)
+    sprite_servidor = pygame.transform.scale(sprite_servidor_original, (80, 80))
+except Exception as e:
+    print(f"Erro ao carregar o sprite do Servidor: {e}")
+    sprite_servidor = pygame.Surface((80, 80))
+    sprite_servidor.fill((255, 255, 0))
 # ---------------------------
 
 # classe do nosso herói, a gente usou POO pra ficar mais organizado
@@ -170,12 +181,10 @@ def desenhar_tela(geraldo, mapa, msg, ativo, resultado):
             # desenha a bordinha de cada quadrado (ciano neon)
             pygame.draw.rect(tela, (0, 255, 255), (x, y, BLOCO, BLOCO), 1)
             
-    # desenha o servidor (S) amarelo neon ali no final (4,4)
+    # desenha o servidor arasaka ali no final (4,4)
     sx = 4 * BLOCO
     sy = 4 * BLOCO
-    pygame.draw.rect(tela, (255, 255, 0), (sx + 10, sy + 10, 80, 80)) # servidor amarelo neon
-    texto_servidor = fonte.render("S", True, (0, 0, 0)) # texto preto pra dar destaque
-    tela.blit(texto_servidor, (sx + 42, sy + 37))
+    tela.blit(sprite_servidor, (sx + 10, sy + 10))
     
     # desenha o Geraldo usando o sprite da imagem
     gx = geraldo.col * BLOCO
