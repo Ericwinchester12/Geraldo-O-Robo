@@ -1,7 +1,7 @@
 import pygame
 import random # a gente precisa disso pra sortear onde as coisas vão cair aleatoriamente no mapa
 
-# --- INICIANDO AS PARADAS ---
+
 # dando a partida no motor do pygame
 pygame.init()
 
@@ -24,7 +24,7 @@ fonte = pygame.font.SysFont("arial", 20)
 # isso aqui é um relógio do pygame pra controlar a velocidade do jogo (os FPS)
 clock = pygame.time.Clock()
 
-# --- CARREGANDO AS IMAGENS ---
+# CARREGANDO AS IMAGENS
 # nome dos arquivos das imagens que tao na mesma pasta do codigo
 NOME_SPRITE_GERALDO = "sprite trabalho cybergeraldo.png"
 NOME_SPRITE_SERVIDOR = "Servidor Arasaka.jpeg"
@@ -53,8 +53,7 @@ except Exception as e:
     sprite_servidor.fill((255, 255, 0))
 
 
-# --- CLASSES DO JOGO ---
-
+# CLASSES DO JOGO 
 # classe do geraldo (nosso personagem)
 class Geraldo:
     # o def __init__ é onde o geraldo "nasce". aqui ficam os status iniciais dele
@@ -159,7 +158,7 @@ class Mapa:
         return False
 
 
-# --- DESENHO DA TELA ---
+#  DESENHO DA TELA 
 # separei os desenhos pra ca senao o loop principal lá embaixo ia ficar muito poluido
 def desenhar_tela(geraldo, mapa, msg, ativo, resultado):
     # pinta a tela inteira de preto pra limpar o quadro anterior
@@ -235,7 +234,7 @@ def desenhar_tela(geraldo, mapa, msg, ativo, resultado):
     pygame.display.flip()
 
 
-# --- START DO JOGO ---
+#  START DO JOGO 
 # aqui a gente cria (instancia) tudo pra valer
 geraldo = Geraldo()
 mapa = Mapa()
