@@ -1,7 +1,6 @@
 import pygame
 import random # a gente precisa disso pra sortear onde as coisas vão cair aleatoriamente no mapa
 
-
 # dando a partida no motor do pygame
 pygame.init()
 
